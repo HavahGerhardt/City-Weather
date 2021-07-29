@@ -1,0 +1,20 @@
+<form class="d-flex justify-content-center">
+    <mat-form-field appearance="legacy">
+        <mat-label>Search a city</mat-label>
+        <mat-icon matSuffix>search</mat-icon>
+        <input #searchInput type="text"
+                placeholder="Search a city"
+                aria-label="City"
+                matInput
+                [formControl]="searchControl"
+                [matAutocomplete]="auto"
+                (input)="onSearchChange()">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelectionChanged($event)" [displayWith]="getCityName">
+            <mat-option *ngFor="let city of cities" [value]="city">
+            {{city.LocalizedName}}
+            <small *ngIf="city.country">({{city.country}})</small>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+</form>

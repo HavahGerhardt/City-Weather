@@ -1,0 +1,39 @@
+.header {
+    min-height: 100%;
+}
+
+.temperature {
+    font-size: 150%;
+    font-weight: bold;
+    margin-top: auto;
+}
+
+.toggle-details-btn {
+    background-color: transparent;
+    border: none;
+}
+
+.forecast-icon {
+    float: right;
+}
+
+.expand-btn {
+    float: right;
+}
+
+mat-card {
+    height: 100%;
+}
+
+.forecast-side {
+    min-height: 100%;
+    max-width: 50%;
+}
+
+
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px)  {
+    .phrase {
+        font-size: small;
+    }
+}

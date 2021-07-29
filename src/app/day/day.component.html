@@ -1,0 +1,17 @@
+<mat-card class="mb-3">
+    <div class="header d-flex flex-column">
+        <p class="fw-bold text-center">{{dayName}} {{dayNum}}/{{month}}</p>
+        <div class="d-flex justify-content-between flex-grow-1">
+            <div class="d-flex flex-column align-items-center forecast-side flex-grow-1">
+                <img [src]="getIcon(day.Day.Icon)" [alt]="day.Day.IconPhrase" [title]="day.Day.IconPhrase">
+                <p class="phrase text-center">{{day.Day.ShortPhrase}}</p>
+                <p class="temperature">{{day.RealFeelTemperature.Maximum.Value}}C°</p>
+            </div>
+            <div class="d-flex flex-column align-items-center forecast-side flex-grow-1">
+                <img [src]="getIcon(day.Night.Icon)" [alt]="day.Night.IconPhrase" [title]="day.Night.IconPhrase">
+                <p class="phrase  text-center">{{day.Night.ShortPhrase}}</p>
+                <p class="temperature">{{day.RealFeelTemperature.Minimum.Value}}C°</p>
+            </div>
+        </div>
+    </div>
+</mat-card>

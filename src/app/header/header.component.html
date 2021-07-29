@@ -1,0 +1,20 @@
+<mat-card class="p-0 mat-elevation-z7">
+    <mat-toolbar class="d-felx justify-content-between align-items-center header">
+        <button mat-icon-button (click)="openDefaultCity()" matTooltip="Home">
+            <mat-icon>wb_sunny</mat-icon>
+            <span>{{appName}}</span>
+        </button>
+        <div>
+            <mat-button-toggle-group [ngModel]="temperatureType" (ngModelChange)="onTemperatureTypeChange($event)" aria-label="Font Style">
+                <mat-button-toggle value="°C">°C</mat-button-toggle>
+                <mat-button-toggle value="°F">°F</mat-button-toggle>
+            </mat-button-toggle-group>
+            <button mat-icon-button aria-label="Home" (click)="openDefaultCity()" matTooltip="Home">
+                <mat-icon>location_on</mat-icon>
+            </button>
+            <button *ngIf="favoritesCount > 0" routerLink="/favorites" mat-icon-button aria-label="Favorites" matTooltip="Favorites">
+                <mat-icon [matBadge]="favoritesCount" matBadgeSize="small" matBadgeColor="primary" color="accent">favorite</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+</mat-card>

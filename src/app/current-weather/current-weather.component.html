@@ -1,0 +1,32 @@
+<div *ngIf="selectedCity.currWeather && selectedCity.currWeather.WeatherText">
+    <mat-card>
+        <app-current-weather-title [city]="selectedCity"></app-current-weather-title>
+    </mat-card>
+    <mat-card class="mt-3 d-flex justify-content-between flex-wrap">
+        <mat-list>
+            <mat-list-item>Real Feel: {{getTemperature(selectedCity.currWeather.RealFeelTemperature)}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Real Feel Shade: {{getTemperature(selectedCity.currWeather.RealFeelTemperatureShade)}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Max UV index: {{selectedCity.currWeather.UVIndexText}} {{selectedCity.currWeather.UVIndex}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Wind: {{selectedCity.currWeather.Wind.Speed.Metric.Value}} {{selectedCity.currWeather.Wind.Speed.Metric.Unit}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Humidity: {{selectedCity.currWeather.RelativeHumidity}}%</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Indoor Humidity: {{selectedCity.currWeather.UVIndexText}} {{selectedCity.currWeather.UVIndex}}</mat-list-item>
+            <mat-divider></mat-divider>
+        </mat-list>
+        <mat-list>
+            <mat-list-item>Dew Point: {{getTemperature(selectedCity.currWeather.DewPoint)}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Pressure: {{selectedCity.currWeather.Pressure.Metric.Value}} {{selectedCity.currWeather.Pressure.Metric.Unit}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Cloud Cover: {{selectedCity.currWeather.CloudCover}}%</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Visibility: {{selectedCity.currWeather.Visibility.Metric.Value}} {{selectedCity.currWeather.Visibility.Metric.Unit}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Cloud Ceiling: {{selectedCity.currWeather.Ceiling.Metric.Value}} {{selectedCity.currWeather.Ceiling.Metric.Unit}}</mat-list-item>
+        </mat-list>
+    </mat-card>
+</div>

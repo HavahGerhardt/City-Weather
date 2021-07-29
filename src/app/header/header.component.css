@@ -1,0 +1,21 @@
+.header, .home {
+    background-color: black;
+    color: #ee890c;
+}
+
+.mat-button-toggle {
+    color: black;
+    background-color: #f5f5f5;
+}
+
+.mat-button-toggle-checked {
+    color: black;
+    background-color: #ee890c;
+}
+
+.mat-button-toggle-group {
+    height: 30px;
+    align-items: center;
+    font-weight: 400;
+    font-size: 15px;
+}

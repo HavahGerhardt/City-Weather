@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-between">
+    <h3 class="fw-bold">{{city.LocalizedName}}</h3>
+    <div> 
+        <button *ngIf="!isFavorite" mat-icon-button (click)="toggleFavorite()" matTooltip="Add to favorites">
+            <mat-icon color="warn">favorite_border</mat-icon>
+        </button>
+        <button *ngIf="isFavorite" mat-icon-button (click)="toggleFavorite()" matTooltip="Remove from favorites">
+            <mat-icon color="warn">favorite</mat-icon>
+        </button>
+    </div>
+</div>
+<div class="d-flex">
+    <div>
+        <img [src]="getIcon(city.currWeather.WeatherIcon)" [alt]="city.currWeather.WeatherText" [title]="city.currWeather.WeatherText" style="width: 100%;">
+    </div>
+    <div>
+        <p class="fw-bold">{{getTemperature(city.currWeather.Temperature)}}</p>
+        <p>{{city.currWeather.WeatherText}}</p>
+    </div>
+</div>
+
