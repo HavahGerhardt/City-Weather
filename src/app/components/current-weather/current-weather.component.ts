@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {  Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { WeatherService } from '../service/weather.service';
-import { LocationState } from '../store/location.reducer';
+import { WeatherService } from '../../service/weather.service';
+import { LocationState } from '../../store/location.reducer';
 
 @Component({
     selector: 'app-current-weather',

@@ -1,9 +1,9 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { WeatherService } from '../service/weather.service';
-import { addFavorite, removeFavorite } from '../store/location.actions';
-import { LocationState } from '../store/location.reducer';
+import { WeatherService } from '../../service/weather.service';
+import { addFavorite, removeFavorite } from '../../store/location.actions';
+import { LocationState } from '../../store/location.reducer';
 
 @Component({
   selector: 'app-current-weather-title',

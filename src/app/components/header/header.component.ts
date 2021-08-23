@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { WeatherService } from '../service/weather.service';
-import { changeTemperatureType, setSelectedCity } from '../store/location.actions';
-import { LocationState } from '../store/location.reducer';
+import { WeatherService } from '../../service/weather.service';
+import { changeTemperatureType, setSelectedCity } from '../../store/location.actions';
+import { LocationState } from '../../store/location.reducer';
 
 @Component({
     selector: 'app-header',

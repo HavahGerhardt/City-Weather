@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { WeatherService } from '../service/weather.service';
+import { WeatherService } from '../../service/weather.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({

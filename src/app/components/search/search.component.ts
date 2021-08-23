@@ -3,9 +3,9 @@ import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { WeatherService } from '../service/weather.service';
-import { setSelectedCity } from '../store/location.actions';
-import { LocationState } from '../store/location.reducer';
+import { WeatherService } from '../../service/weather.service';
+import { setSelectedCity } from '../../store/location.actions';
+import { LocationState } from '../../store/location.reducer';
 
 @Component({
     selector: 'app-search',

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { LocationState } from '../store/location.reducer';
+import { LocationState } from '../../store/location.reducer';
 
 @Component({
   selector: 'app-daily-forecast',

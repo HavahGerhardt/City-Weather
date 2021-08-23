@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AlertModalComponent } from '../alert-modal/alert-modal.component';
+import { AlertModalComponent } from '../modals/alert-modal/alert-modal.component';
 
 @Injectable({
   providedIn: 'root'
