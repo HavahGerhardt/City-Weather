@@ -13,14 +13,6 @@
     border: none;
 }
 
-.forecast-icon {
-    float: right;
-}
-
-.expand-btn {
-    float: right;
-}
-
 mat-card {
     height: 100%;
 }

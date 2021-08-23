@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { WeatherService } from '../../service/weather.service';
 import { addFavorite, removeFavorite } from '../../store/location.actions';
 import { LocationState } from '../../store/location.reducer';
@@ -13,7 +14,6 @@ import { LocationState } from '../../store/location.reducer';
 export class CurrentWeatherTitleComponent implements OnInit, OnDestroy, OnChanges {
     @Input() city : any;
     isFavorite = false;
-    storeSub : Subscription;
     temperatureType: string;
 
     constructor(private weatherService: WeatherService, private locationStore : Store<{locations:LocationState}>) { }
@@ -23,12 +23,10 @@ export class CurrentWeatherTitleComponent implements OnInit, OnDestroy, OnChange
 
     ngOnChanges(changes: SimpleChanges) {
         // If city has been changed, check if is a favorite
-        const tempSub = this.locationStore.select('locations').subscribe(state => {
+        this.locationStore.select('locations')
+        .pipe(take(1))
+        .subscribe(state => {
             this.isFavorite = state.favorites.has(this.city.Key);
-
-            setTimeout(() => {
-                tempSub.unsubscribe()
-            }, 0);
         });
     }
 
@@ -60,7 +58,5 @@ export class CurrentWeatherTitleComponent implements OnInit, OnDestroy, OnChange
     }
 
     ngOnDestroy() {
-        if(this.storeSub)
-            this.storeSub.unsubscribe();
     }
 }

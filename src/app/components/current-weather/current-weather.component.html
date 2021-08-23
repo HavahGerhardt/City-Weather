@@ -1,4 +1,4 @@
-<div *ngIf="selectedCity.currWeather && selectedCity.currWeather.WeatherText">
+<div *ngIf="selectedCity && selectedCity.currWeather && selectedCity.currWeather.WeatherText">
     <mat-card>
         <app-current-weather-title [city]="selectedCity"></app-current-weather-title>
     </mat-card>

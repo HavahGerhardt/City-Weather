@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { filter, takeUntil, takeWhile } from 'rxjs/operators';
 import { LocationState } from '../../store/location.reducer';
 
 @Component({
@@ -11,23 +12,21 @@ import { LocationState } from '../../store/location.reducer';
 export class DailyForecastComponent implements OnInit, OnDestroy {
     selectedCity: any;
     date : Date;
-    storeSub : Subscription;
+    killSubscribers = new Subject();
     
     constructor(private locationStore: Store<{locations:LocationState}>) { }
 
     ngOnInit(): void {
         // Listen for store dispatch/action events 
-        // Can be done more effectively if it'll listen for 'select city' events only
-        this.storeSub = this.locationStore.select('locations').subscribe(state => {
-            // Change selected city only if city key was changed
-            if(!this.selectedCity || this.selectedCity.Key != state.selectedCity.Key) {
-                this.selectedCity = state.selectedCity;        
-            }
-        });
+        this.locationStore.select('locations')
+        .pipe(
+            takeUntil(this.killSubscribers),
+            filter(state => state.selectedCity) // Listen for selected city change events
+        )
+        .subscribe(state => this.selectedCity = state.selectedCity);
     }
 
     ngOnDestroy(): void {
-        if(this.storeSub)
-            this.storeSub.unsubscribe();
+        this.killSubscribers.next();
     }
 }

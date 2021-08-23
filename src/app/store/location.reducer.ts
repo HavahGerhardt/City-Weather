@@ -1,7 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { addFavorite, changeTemperatureType, removeFavorite, setSelectedCity } from './location.actions';
  
-// localstorage keies
+// localstorage keys
 const favLocalStorageKey = 'favorites';
 const temperatureLocalStorageKey = 'temperature';
 
@@ -62,7 +62,6 @@ function getTemperatureType() {
         localStorage.setItem(temperatureLocalStorageKey, type);
 }
 
-
 export interface LocationState {
     selectedCity: any,
     temperatureType: string,
@@ -71,7 +70,7 @@ export interface LocationState {
 
 // Initial state
 export const initialState : LocationState = {
-    selectedCity: {},
+    selectedCity: undefined,
     temperatureType: getTemperatureType(),
     favorites: getSavedFavorites()
 };

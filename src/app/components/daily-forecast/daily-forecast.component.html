@@ -1,4 +1,4 @@
-<div *ngIf="selectedCity.forecast && selectedCity.forecast.DailyForecasts" class="mt-5">
+<div *ngIf="selectedCity && selectedCity.forecast && selectedCity.forecast.DailyForecasts" class="mt-5">
     <h1 class="text-center fw-bold">Daily forecasts</h1>
     <div class="d-flex flex-wrap">
         <div class="forecast p-1" *ngFor="let day of selectedCity.forecast.DailyForecasts" >

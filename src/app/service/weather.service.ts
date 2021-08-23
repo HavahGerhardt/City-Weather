@@ -1,19 +1,42 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { AlertModalComponent } from '../modals/alert-modal/alert-modal.component';
+import { setSelectedCity } from '../store/location.actions';
+import { LocationState } from '../store/location.reducer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WeatherService {
     appName = 'City Weather';
+    
     // accuWeather apiKey
     private apiKey = 'O1WQwjf9uAToDJI8of9UeburII3aWtBi';
+    private apiUrl = 'http://dataservice.accuweather.com';
+
     // Days array
     days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-    constructor(private httpClient : HttpClient, public dialog: MatDialog) { }
+    constructor(private httpClient : HttpClient, public dialog: MatDialog, private locationStore : Store<{locations:LocationState}>) { }
+
+    /**
+     * Select city to display on home page
+     * @param cityKey 
+     */
+    selectCity(cityKey:string) {
+        // Get the selected city's weather and forecast
+        this.getCity(cityKey, true, true)
+        .then(selectedCity => {
+            // Dispatch selected city
+            this.locationStore.dispatch(setSelectedCity({selected: selectedCity}));
+        })
+        .catch(error => {
+            console.log('Get city error', error)
+            this.openAlertModal(error);
+        });
+    }
 
     /**
      * Get city data with minimal API requests
@@ -95,7 +118,7 @@ export class WeatherService {
      */
     private getCityByKey(cityKey: string) {
         return new Promise<any>((resolve, reject) => {
-            this.httpClient.get(`http://dataservice.accuweather.com/locations/v1/${cityKey}`, {params: { apikey:this.apiKey, details:true }}).toPromise()
+            this.httpClient.get(`${this.apiUrl}/locations/v1/${cityKey}`, {params: { apikey:this.apiKey, details:true }}).toPromise()
             .then(result => {
                 if(result)
                     resolve(result);
@@ -116,7 +139,7 @@ export class WeatherService {
      */
     getCityByName(cityName: string) {
         return new Promise((resolve, reject) => {
-            this.httpClient.get(`http://dataservice.accuweather.com/locations/v1/cities/search`, {params: { apikey:this.apiKey, q:cityName }}).toPromise()
+            this.httpClient.get(`${this.apiUrl}/cities/search`, {params: { apikey:this.apiKey, q:cityName }}).toPromise()
             .then(results => {
                 if(Array.isArray(results) && results.length > 0) {
                     resolve(results[0]); // Return the first result
@@ -139,7 +162,7 @@ export class WeatherService {
      */
     getCityByGeo(latitude: number, longitude: number) {
         return new Promise((resolve, reject) => {
-            this.httpClient.get(`http://dataservice.accuweather.com/locations/v1/cities/geoposition/search`, {params: { apikey:this.apiKey, q:`${latitude},${longitude}` }}).toPromise()
+            this.httpClient.get(`${this.apiUrl}/locations/v1/cities/geoposition/search`, {params: { apikey:this.apiKey, q:`${latitude},${longitude}` }}).toPromise()
             .then(result => {
                 resolve(result);
             })
@@ -156,7 +179,7 @@ export class WeatherService {
      */
     autoComplete(searchWord: string) {
         return new Promise((resolve, reject) => {
-            this.httpClient.get(`http://dataservice.accuweather.com/locations/v1/cities/autocomplete`, {params: { apikey:this.apiKey, q:searchWord }}).toPromise()
+            this.httpClient.get(`${this.apiUrl}/locations/v1/cities/autocomplete`, {params: { apikey:this.apiKey, q:searchWord }}).toPromise()
             .then(results => {
                 resolve(results);
             })
@@ -173,7 +196,7 @@ export class WeatherService {
      */
     private getCurrentWeather(locationKey: string) {
         return new Promise<any>((resolve, reject) => {
-            this.httpClient.get(`http://dataservice.accuweather.com/currentconditions/v1/${locationKey}`, {params:{ apikey:this.apiKey, details:true }}).toPromise()
+            this.httpClient.get(`${this.apiUrl}/currentconditions/v1/${locationKey}`, {params:{ apikey:this.apiKey, details:true }}).toPromise()
             .then(results => {
                 if(Array.isArray(results) && results.length > 0)
                     resolve({currWeather:results[0]}); // Return the first result
@@ -194,7 +217,7 @@ export class WeatherService {
      */
     private getForecast(locationKey: string) {
         return new Promise<any>((resolve, reject) => {
-            this.httpClient.get(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${locationKey}`, {params:{ apikey:this.apiKey, details:true, metric:true }}).toPromise()
+            this.httpClient.get(`${this.apiUrl}/forecasts/v1/daily/5day/${locationKey}`, {params:{ apikey:this.apiKey, details:true, metric:true }}).toPromise()
             .then(result => {
                 if(result) {
                     resolve({forecast:result});
